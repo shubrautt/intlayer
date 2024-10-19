@@ -26,8 +26,9 @@
   ],
   "scripts": {
     "serve": "npx intlayer serve",
-    "test": "",
+    "test": "vitest",
     "transpile": "npx intlayer build",
+    "typecheck": "tsc --noEmit",
     "watch": "npx intlayer build --watch"
   },
   "dependencies": {

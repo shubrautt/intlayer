@@ -33,31 +33,33 @@
       "url": "https://github.com/aymericzip"
     }
   ],
+  "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.mts",
+      "types": "./dist/index.d.ts",
       "require": "./dist/cjs/index.cjs",
-      "import": "./dist/esm/index.mjs"
+      "import": "./dist/mjs/index.mjs"
     },
     "./client": {
-      "types": "./dist/esm/client/index.d.mts",
+      "types": "./dist/client/index.d.ts",
       "require": "./dist/cjs/client/index.cjs",
-      "import": "./dist/esm/client/index.mjs"
+      "import": "./dist/mjs/client/index.mjs"
     },
     "./middleware": {
-      "types": "./dist/esm/middleware/index.d.mts",
+      "types": "./dist/middleware/index.d.ts",
       "require": "./dist/cjs/middleware/index.cjs",
-      "import": "./dist/esm/middleware/index.mjs"
+      "import": "./dist/mjs/middleware/index.mjs"
     },
     "./server": {
-      "types": "./dist/esm/server/index.d.mts",
+      "types": "./dist/server/index.d.ts",
       "require": "./dist/cjs/server/index.cjs",
-      "import": "./dist/esm/server/index.mjs"
+      "import": "./dist/mjs/server/index.mjs"
     },
     "./package.json": "./package.json"
   },
   "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.mjs",
+  "module": "dist/mjs/index.mjs",
+  "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
       "package.json": [
@@ -70,22 +72,22 @@
     "./package.json"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "vite build",
     "clean": "rimraf ./dist",
-    "dev": "tsup --watch",
+    "dev": "vite build --watch",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --cache --fix",
     "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
-    "test": "",
-    "typecheck": "tsup--project ./tsconfig.json --noEmit"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
     "@intlayer/chokidar": "workspace:^",
     "@intlayer/config": "workspace:^",
     "@intlayer/core": "workspace:^",
-    "@intlayer/dictionaries-entry": "workspace:^",
+    "@intlayer/design-system": "workspace:^",
     "@intlayer/webpack": "workspace:^",
     "intlayer": "workspace:^",
     "negotiator": "^0.6.3",
@@ -99,12 +101,16 @@
     "@types/react": "^18.3.3",
     "@utils/eslint-config": "workspace:^",
     "@utils/ts-config": "workspace:^",
+    "@vitejs/plugin-react": "^4.3.2",
     "eslint": "^9.11.1",
     "prettier": "3.3.3",
     "react": "^18.3.1",
     "rimraf": "6.0.1",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "rollup-preserve-directives": "^1.1.2",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.8",
+    "vite-plugin-dts": "^3.9.1",
+    "vitest": "^2.1.2"
   },
   "peerDependencies": {
     "react": "^18.2.0"
