@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, type FC, useEffect, type ReactNode } from 'react';
+// @ts-ignore react-intlayer not build yet
+import { useDictionary } from 'react-intlayer';
 import { Form, useForm } from '../../Form';
-import { getResetPasswordContent } from './index.content';
+import { resetPasswordContent } from './resetPasswordContent.content';
 import {
   useResetPasswordSchema,
   type ResetPassword,
@@ -28,7 +30,7 @@ export const ResetPasswordForm: FC<ForgotPasswordFormProps> = ({
     resendRecoveryEmailButton,
     resendInText,
     backToLoginButton,
-  } = getResetPasswordContent();
+  } = useDictionary(resetPasswordContent);
   const { form, isSubmitting, isSubmitted, isValid } = useForm(
     ResetPasswordSchema,
     {

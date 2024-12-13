@@ -87,7 +87,7 @@ const formatLocaleWithName = (locale: Locales): string => {
 export const auditFile = async (filePath: string, options?: AuditOptions) => {
   try {
     const relativePath = relative(projectPath, filePath);
-    console.log(`Auditing file: ${relativePath}`);
+    console.info(`Auditing file: ${relativePath}`);
 
     // Extract internationalization configuration, including locales and the default locale.
     const { internationalization } = getConfiguration();
@@ -134,10 +134,10 @@ export const auditFile = async (filePath: string, options?: AuditOptions) => {
     if (newContent) {
       writeFileContent(filePath, newContent);
 
-      console.log(`${options?.logPrefix ?? ''}File ${relativePath} updated`);
+      console.info(`${options?.logPrefix ?? ''}File ${relativePath} updated`);
     }
 
-    console.log(
+    console.info(
       `${options?.logPrefix ?? ''}${chatCompletion.usage?.total_tokens} tokens used in the request`
     );
   } catch (error) {
@@ -172,9 +172,7 @@ export const audit = async (options: AuditOptions) => {
       exclude: options?.excludedGlobs,
     });
 
-    contentDeclarationFilesList = contentDeclarationFilesPath
-      .reverse()
-      .slice(48);
+    contentDeclarationFilesList = contentDeclarationFilesPath;
   }
 
   const limit = pLimit(options?.asyncLimit ? Number(options?.asyncLimit) : 5); // Limit the number of concurrent requests
