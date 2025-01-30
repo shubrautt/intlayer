@@ -17,6 +17,7 @@ import {
   useEditorEnabled,
 } from '@intlayer/editor-react';
 import { useEffect, type FC, type PropsWithChildren } from 'react';
+import { useDictionaryChangeEvent } from './useDictionaryChangeEvent';
 
 const IntlayerEditorHooksEnabled: FC = () => {
   /**
@@ -45,6 +46,7 @@ const IntlayerEditorHooksEnabled: FC = () => {
 };
 
 const IntlayerEditorHook: FC = () => {
+  useDictionaryChangeEvent();
   const { enabled } = useEditorEnabled();
 
   return enabled ? <IntlayerEditorHooksEnabled /> : <></>;

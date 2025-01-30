@@ -33,6 +33,7 @@ import { sessionAuthRouter } from '@routes/sessionAuth.routes';
 import { userRouter } from '@routes/user.routes';
 import { stripeRouter } from '@routes/stripe.routes';
 import { aiRouter } from '@routes/ai.routes';
+import { eventListenerRouter } from '@routes/event-listener.routes';
 
 // Webhooks
 import { stripeWebhook } from '@webhooks/stripe.webhook';
@@ -174,6 +175,7 @@ app.use('/api/tag', tagRouter);
 app.use('/api/dictionary', dictionaryRouter);
 app.use('/api/stripe', stripeRouter);
 app.use('/api/ai', aiRouter);
+app.use('/api/event-listener', eventListenerRouter);
 
 // Server
 app.listen(process.env.PORT, () => {
