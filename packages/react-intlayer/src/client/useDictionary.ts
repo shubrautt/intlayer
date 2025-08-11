@@ -2,7 +2,7 @@
 
 import type { LocalesValues } from '@intlayer/config/client';
 import type { Dictionary } from '@intlayer/core';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { getDictionary } from '../getDictionary';
 import { IntlayerClientContext } from './IntlayerProvider';
 
@@ -18,5 +18,8 @@ export const useDictionary = <T extends Dictionary>(
   const { locale: currentLocale } = useContext(IntlayerClientContext);
   const localeTarget = locale ?? currentLocale;
 
-  return getDictionary<T, LocalesValues>(dictionary, localeTarget);
+  return useMemo(
+    () => getDictionary<T, LocalesValues>(dictionary, localeTarget),
+    [dictionary, localeTarget]
+  );
 };
