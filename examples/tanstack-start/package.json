@@ -20,8 +20,8 @@
     "@tanstack/react-start": "^1.130.2",
     "@tanstack/router-plugin": "^1.121.2",
     "intlayer": "workspace:*",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-intlayer": "workspace:*",
     "tailwindcss": "^4.1.8",
     "vite-tsconfig-paths": "^5.1.4"
