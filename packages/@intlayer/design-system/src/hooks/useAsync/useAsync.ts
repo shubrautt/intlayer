@@ -61,7 +61,7 @@ const getArgs = (args?: any[]): any[] =>
   args ? (Array.isArray(args) ? args : [args]) : [];
 
 const getKeyWithArgs = (key: string, args: any[]) =>
-  (getArgs(args)?.length ?? 0) > 0 ? `${key}/${JSON.stringify(args)}` : key;
+  (getArgs(args).length ?? 0) > 0 ? `${key}/${JSON.stringify(args)}` : `${key}`;
 
 /**
  * A custom React hook that manages asynchronous operations, providing easy-to-use states and controls over fetching, caching, and retry mechanisms.
@@ -216,14 +216,14 @@ export const useAsync = <
         onSuccess?.(result);
 
         // Invalidate other queries if necessary
-        if ((invalidateQueries.length ?? 0) > 0) {
+        if (invalidateQueries.length > 0) {
           setQueriesState(invalidateQueries, {
             isInvalidated: true,
           });
         }
 
         // Update other queries if necessary
-        if ((updateQueries.length ?? 0) > 0) {
+        if (updateQueries.length > 0) {
           setQueriesState(updateQueries, {
             data: result,
           });
