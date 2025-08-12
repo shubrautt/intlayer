@@ -19,10 +19,10 @@ export const useIntlayer = <T extends DictionaryKeys>(
   locale?: LocalesValues
 ): DeepTransformContent<IntlayerDictionaryTypesConnector[T]['content']> => {
   const { locale: currentLocale } = useContext(IntlayerClientContext);
-  const localeTarget = locale ?? currentLocale;
 
-  return useMemo(
-    () => getIntlayer(key, localeTarget) as any,
-    [key, localeTarget]
-  );
+  return useMemo(() => {
+    const localeTarget = locale ?? currentLocale;
+
+    return getIntlayer(key, localeTarget) as any;
+  }, [key, currentLocale, locale]);
 };

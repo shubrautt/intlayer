@@ -16,10 +16,10 @@ export const useDictionary = <T extends Dictionary>(
   locale?: LocalesValues
 ) => {
   const { locale: currentLocale } = useContext(IntlayerClientContext);
-  const localeTarget = locale ?? currentLocale;
 
-  return useMemo(
-    () => getDictionary<T, LocalesValues>(dictionary, localeTarget),
-    [dictionary, localeTarget]
-  );
+  return useMemo(() => {
+    const localeTarget = locale ?? currentLocale;
+
+    return getDictionary<T, LocalesValues>(dictionary, localeTarget);
+  }, [dictionary, currentLocale, locale]);
 };
