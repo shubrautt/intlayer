@@ -10,23 +10,41 @@ export const getBlogData = (
   return blog satisfies Record<string, CategorizedBlogData>;
 };
 
-export const getBlogSubSection = (
-  docData: Record<string, CategorizedBlogData>,
-  sectionKey: string[]
+const findDocBySectionKey = (
+  docData: CategorizedBlogData,
+  sectionKey: string
 ): CategorizedBlogData | undefined => {
-  let current = docData as unknown as CategorizedBlogData; // Use the `docData` object to navigate through sections
+  if (docData[sectionKey as keyof typeof docData]) {
+    return docData[sectionKey as keyof typeof docData] as CategorizedBlogData;
+  }
 
-  for (const key of sectionKey) {
-    if (current[key as keyof typeof current]) {
-      current = current[key as keyof typeof current] as CategorizedBlogData; // Navigate deeper
-    } else if (current.subSections && current.subSections[key]) {
-      current = current.subSections[key] as CategorizedBlogData; // Navigate deeper
-    } else {
-      break; // If key is not found, return an empty string
+  for (const key of Object.keys(docData)) {
+    const subSections = (
+      docData[key as keyof typeof docData] as CategorizedBlogData
+    ).subSections;
+
+    if (subSections) {
+      let foundDataFound = findDocBySectionKey(
+        subSections as unknown as CategorizedBlogData,
+        sectionKey
+      );
+
+      if (foundDataFound) {
+        return foundDataFound;
+      }
     }
   }
 
-  return current; // Return the title if it exists
+  return undefined;
+};
+
+export const getBlogSubSection = (
+  docData: Record<string, CategorizedBlogData>,
+  sectionKey: string
+) => {
+  let current = docData as unknown as CategorizedBlogData;
+
+  return findDocBySectionKey(current, sectionKey);
 };
 
 type BlogSectionPaths = {

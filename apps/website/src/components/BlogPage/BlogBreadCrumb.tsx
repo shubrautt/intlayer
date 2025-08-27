@@ -1,3 +1,4 @@
+import { PagesRoutes } from '@/Routes';
 import {
   Breadcrumb,
   type BreadcrumbLink,
@@ -7,7 +8,6 @@ import { type Locales, getLocalizedUrl } from 'intlayer';
 import { type FC, useMemo } from 'react';
 import { getBlogSubSection } from './blogData';
 import type { Section } from './types';
-import { PagesRoutes } from '@/Routes';
 
 type BlogBreadCrumbProps = {
   activeSections: string[];
@@ -29,7 +29,6 @@ export const BlogBreadCrumb: FC<BlogBreadCrumbProps> = ({
       },
       ...activeSections
         .filter((el) => el !== 'index')
-        .map((_, index) => activeSections.slice(0, index + 1))
         .map((el) => {
           const blogSection = getBlogSubSection(blogData, el);
           const sectionUrl = blogSection?.default?.url;
